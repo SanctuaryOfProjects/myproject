@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from .models import *
 from datetime import datetime
 from .forms import *
@@ -73,6 +74,15 @@ def schedule(request):
     return render(request, 'schedule.html', context)
 
 def products(request):
+    query = request.GET.get('q')
+    if query:
+        product_list = Product.objects.filter(name__icontains=query)
+    else:
+        product_list = Product.objects.all()
+
+    paginator = Paginator(product_list, 10)  # Показывать по 10 товаров на странице
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     product = Product.objects.all()
     form = ProductForm()
     if request.method == 'POST':
@@ -81,7 +91,7 @@ def products(request):
             form.save()
             return redirect('products')
 
-    context = {'product': product, 'form': form}
+    context = {'page_obj': page_obj, 'query': query, 'product': product, 'form': form}
     return render(request, 'products.html', context)
 
 def delete_products(request, pk):
