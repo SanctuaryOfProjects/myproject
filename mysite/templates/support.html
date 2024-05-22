@@ -1,0 +1,44 @@
+{% extends 'side-menu.html' %}
+{% load static %}
+
+{% block content %}
+
+<br>
+<br>
+<br>
+<h3>Служба поддержки</h3>
+<div class="container mt-5">
+    <!-- Вкладки -->
+    <ul class="nav nav-tabs mb-4">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'chat' %}">Чат</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="#">Служба поддержки</a>
+        </li>
+    </ul>
+    <br>
+    <div class="row">
+        <div class="col-md-8">
+            <h5>Список тикетов</h5>
+            <ul class="list-group">
+                {% for ticket in tickets %}
+                    <li class="list-group-item">
+                        <strong>{{ ticket.subject }}</strong> - {{ ticket.description }} <em>{{ ticket.get_status_display }} | {{ ticket.get_priority_display }}</em>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h5>Создать тикет</h5>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Отправить</button>
+            </form>
+        </div>
+    </div>
+
+<br>
+<br>
+{% endblock %}

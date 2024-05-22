@@ -1,0 +1,73 @@
+{% extends 'side-menu.html' %}
+{% load static %}
+
+{% block content %}
+
+<br>
+<br>
+<br>
+<h3>График работы на торговой точке</h3>
+<div class="container mt-5">
+    <!-- Вкладки -->
+    <ul class="nav nav-tabs mb-4">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'workers' %}">Сотрудники</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="{% url 'schedule' %}">График работы</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Уволенные</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Черный список</a>
+        </li>
+    </ul>
+
+    <br>
+
+    <h3>График работы для {{ store.name }}</h3>
+    <br>
+    <form method="get">
+        <label for="start_date">Начальная дата:</label>
+        <input type="date" id="start_date" name="start_date" value="{{ start_date|default_if_none:'' }}">
+        <label for="end_date">Конечная дата:</label>
+        <input type="date" id="end_date" name="end_date" value="{{ end_date|default_if_none:'' }}">
+        <button type="submit" class="btn btn-primary" >Фильтровать</button>
+    </form>
+    <br>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Сотрудник</th>
+                <th>Рабочий день</th>
+                <th>Начало смены</th>
+                <th>Конец смены</th>
+                <th>Комментарий</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in schedule %}
+                <tr>
+                    <td>{{ entry.employee }}</td>
+                    <td>{{ entry.day }}</td>
+                    <td>{{ entry.shift_start }}</td>
+                    <td>{{ entry.shift_end }}</td>
+                    <td>{{ entry.comment }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">Нет данных</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+</div>
+<br>
+<br>
+<br>
+{% endblock %}

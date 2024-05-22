@@ -1,0 +1,78 @@
+{% extends 'side-menu.html' %}
+{% load static %}
+
+
+{% block content %}
+<br>
+<br>
+<br>
+
+<div class="container mt-5">
+    <!-- Офферная конструкция -->
+    <div class="jumbotron text-center" style="background-color: #eaf1ff; color: rgb(44, 44, 44);">
+        <h1 class="display-4">Добро пожаловать! Вы снова с нами.</h1>
+        <p class="lead">Мы предлагаем вам инструменты для эффективного управления вашим бизнесом в онлайн-среде.</p>
+        <hr class="my-4">
+        <p>Начните работать прямо сейчас!</p>
+    </div>
+<br>
+<div class="text-center"><h3>Быстрые ссылки</h3></div>
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <i class="fas fa-store fa-3x mb-3"></i>
+                <h5 class="card-title">Торговые точки</h5>
+                <a href="{% url 'store' %}" class="btn btn-dark">Перейти</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <i class="fas fa-clock fa-3x mb-3"></i>
+                <h5 class="card-title">График работы</h5>
+                <a href="{% url 'schedule' %}" class="btn btn-dark">Перейти</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <i class="fas fa-shopping-cart fa-3x mb-3"></i>
+                <h5 class="card-title">Товары</h5>
+                <a href="{% url 'products' %}" class="btn btn-dark">Перейти</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mt-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <i class="fas fa-truck fa-3x mb-3"></i>
+                <h5 class="card-title">Поставщики</h5>
+                <a href="{% url 'producers' %}" class="btn btn-dark">Перейти</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mt-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <i class="fas fa-handshake fa-3x mb-3"></i>
+                <h5 class="card-title">Клиенты</h5>
+                <a href="{% url 'partner' %}" class="btn btn-dark">Перейти</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mt-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <i class="fas fa-headset fa-3x mb-3"></i>
+                <h5 class="card-title">Служба поддержки</h5>
+                <a href="{% url 'support' %}" class="btn btn-dark">Перейти</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}

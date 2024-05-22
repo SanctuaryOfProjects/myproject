@@ -1,0 +1,65 @@
+{% extends 'side-menu.html' %}
+{% load static %}
+
+{% block content %}
+
+<br>
+<br>
+<br>
+<h3>Аналитика</h3>
+<div class="container mt-5">
+    <!-- Вкладки -->
+    <ul class="nav nav-tabs mb-4">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'store' %}">Точки</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'promotions' %}">Акции</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="#">Аналитика</a>
+        </li>
+    </ul>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header"><i class="fas fa-info-circle"></i> Общая информация</div>
+                <div class="card-body">
+                    <p><i class="fas fa-box"></i> Всего товаров: {{ total_products_count }}</p>
+                    <p><i class="fas fa-store"></i> Всего торговых точек: {{ total_stores_count }}</p>
+                    <p><i class="fas fa-users"></i> Всего сотрудников: {{ total_employees_count }}</p>
+                    <p><i class="fas fa-tags"></i> Самая прибыльная категория: {{ most_profitable_category }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header"><i class="fas fa-chart-line"></i> Сделки</div>
+                <div class="card-body">
+                    <p><i class="fas fa-handshake"></i> Количество прибытия: {{ deals_count }}</p>
+                    <p><i class="fas fa-money-bill-wave"></i> Общая сумма прибытия: <span style="color: green;">+ {{ total_deals_value }}</span> тг.</p>
+                    <p><i class="fas fa-exchange-alt"></i> Количество убытия: {{ decreases_count }}</p>
+                    <p><i class="fas fa-coins"></i> Общая сумма убытия: <span style="color: rgb(182, 5, 29);">- {{ total_decreases_value }}</span> тг.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header"><i class="fas fa-shopping-basket"></i> Категории товаров</div>
+                <div class="card-body">
+                    <ul>
+                        {% for category in category_stats %}
+                            <li><strong>{{ category.name }}:</strong>  {{ category.total_products }} товаров на сумму <span style="color: rgb(7, 27, 202);">{{ category.total_value }}</span> тг.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<br>
+<br>
+{% endblock %}

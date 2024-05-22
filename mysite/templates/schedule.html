@@ -1,0 +1,67 @@
+{% extends 'side-menu.html' %}
+{% load static %}
+
+{% block content %}
+
+<br>
+<br>
+<br>
+<h3>График работы</h3>
+<div class="container mt-5">
+    <!-- Вкладки -->
+    <ul class="nav nav-tabs mb-4">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'workers' %}">Сотрудники</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="#">График работы</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Уволенные</a>
+        </li>
+        <!--
+        <li class="nav-item">
+            <a class="nav-link" href="#">Черный список</a>
+        </li>-->
+    </ul>
+
+    <!-- Фильтр и строка поиска -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Поиск...">
+        </div>
+        <div class="col-md-1">
+            <a class="btn btn-dark">Найти</a>
+        </div>
+    </div>
+
+    <!-- Форма добавления торговой точки -->
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Назначить график</h3>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Добавить</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h3>Список торговых точек</h3>
+            <ul class="list-group">
+                {% for s in stores %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="badge text-bg-warning mr-3" style="margin-right: 10px;">{{ forloop.counter }}</span>
+                    <span style="flex-grow: 1; margin-right: 10px;">{{ s.name }}</span>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="{% url 'store_schedule' s.id %}" class="btn btn-outline-primary">Перейти</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+{% endblock %}

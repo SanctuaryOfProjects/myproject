@@ -1,0 +1,72 @@
+{% extends 'side-menu.html' %}
+{% load static %}
+
+{% block content %}
+
+<br>
+<br>
+<br>
+<h3>Убытие</h3>
+<div class="container mt-5">
+    <!-- Вкладки -->
+    <ul class="nav nav-tabs mb-4">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'products' %}">Товары</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Бренды</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'producers' %}">Поставщики</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'category' %}">Категории</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'deal' %}">Прибытие</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="#">Убытие</a>
+        </li>
+    </ul>
+
+    <!-- Фильтр и строка поиска -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Поиск...">
+        </div>
+        <div class="col-md-1">
+            <a class="btn btn-dark">Найти</a>
+        </div>
+    </div>
+
+    <!-- Форма добавления торговой точки -->
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Убытие товара</h3>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Добавить</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h3>Записи об убытии</h3>
+            <ul class="list-group">
+                {% for d in decreases %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="badge text-bg-warning mr-3" style="margin-right: 10px;">{{ forloop.counter }}</span>
+                    <span style="flex-grow: 1; margin-right: 10px;">{{ d.product }} <strong>x</strong> <span style="color:blue">{{ d.quantity }}</span> <strong>=</strong> <span style="color:rgb(128, 0, 0)">{{d.total_price}}</span> тг.</span>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a class="btn btn-outline-primary">Детали</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+{% endblock %}

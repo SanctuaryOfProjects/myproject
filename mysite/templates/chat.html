@@ -1,0 +1,46 @@
+{% extends 'side-menu.html' %}
+{% load static %}
+
+{% block content %}
+
+<br>
+<br>
+<br>
+<h3>Чат</h3>
+<div class="container mt-5">
+    <!-- Вкладки -->
+    <ul class="nav nav-tabs mb-4">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">Чат</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'support' %}">Служба поддержки</a>
+        </li>
+    </ul>
+    <br>
+    <div class="row">
+        <div class="col-md-8">
+            <h5>Сообщения</h5>
+            <ul class="list-group">
+                {% for message in messages %}
+                    <li class="list-group-item">
+                        <strong>{{ message.sender.name }}:</strong> {{ message.content }} <em>{{ message.timestamp }}</em>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h5>Отправка сообщения</h5>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Отправить</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+
+{% endblock %}
