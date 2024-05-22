@@ -25,9 +25,9 @@ SECRET_KEY = 'django-insecure-l(*e$a3%x7rx^k-4wtkjpp$yd%4$cyjt1a5g2zqx=%1d5=%z!p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["web-production-1c15.up.railway.app/", "localhost", "127.0.0.1"]
-CSRF_TRUSTED_ORIGINS = ["https://web-production-1c15.up.railway.app/"]
+ALLOWED_HOSTS = ['web-production-1c15.up.railway.app', 'localhost', '127.0.0.1']
 
+CSRF_TRUSTED_ORIGINS = ["web-production-1c15.up.railway.app"]
 
 # Application definition
 
@@ -77,8 +77,13 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'DATBASE_URL': 'postgresql://postgres:xUTqGgXTJFLyYuuGPIvUwIIvkCFWqFwM@roundhouse.proxy.rlwy.net:44782/railway',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'xUTqGgXTJFLyYuuGPIvUwIIvkCFWqFwM',
+        'HOST': 'roundhouse.proxy.rlwy.net',
+        'PORT': '44782',
     }
 }
 
